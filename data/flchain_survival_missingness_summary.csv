@@ -1,0 +1,12 @@
+variable,intended_p,n_missing,pct_missing
+death,,0,0.0
+futime,,0,0.0
+age,0.15,1160,14.73
+chapter,,5705,72.45
+creatinine,,1350,17.15
+flc.grp,0.01,83,1.05
+kappa,,0,0.0
+lambda,,0,0.0
+mgus,,0,0.0
+sample.yr,,0,0.0
+sex,0.4,3287,41.74

@@ -62,25 +62,23 @@ output_path_missing = os.path.join(project_path, "data", "flchain_survival_with_
 df_missing.to_csv(output_path_missing, index=False)
 
 # Generate missingness summary
-import json
-missingness_summary = {
-    'dataset': 'flchain_survival',
-    'selected_variables': {var: {'intended_p': p} for var, p in missing_assignments.items()},
-    'actual_missingness': {}
-}
+missingness_data = []
 
 # Calculate actual missingness for all columns
 for col in df_missing.columns:
     n_missing = df_missing[col].isna().sum()
     pct_missing = (n_missing / len(df_missing)) * 100
-    missingness_summary['actual_missingness'][col] = {
+    intended_p = missing_assignments.get(col, '')
+    missingness_data.append({
+        'variable': col,
+        'intended_p': intended_p,
         'n_missing': int(n_missing),
         'pct_missing': round(pct_missing, 2)
-    }
+    })
 
-# Write summary to JSON
-summary_path = os.path.join(project_path, "data", "flchain_survival_missingness_summary.json")
-with open(summary_path, 'w') as f:
-    json.dump(missingness_summary, f, indent=2)
+# Create DataFrame and save to CSV
+missingness_df = pd.DataFrame(missingness_data)
+summary_path = os.path.join(project_path, "data", "flchain_survival_missingness_summary.csv")
+missingness_df.to_csv(summary_path, index=False)
 
 print(f"Missingness summary saved to {summary_path}")
