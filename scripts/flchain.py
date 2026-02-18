@@ -78,7 +78,7 @@ for col in df_missing.columns:
 
 # Create DataFrame and save to CSV
 missingness_df = pd.DataFrame(missingness_data)
-summary_path = os.path.join(project_path, "data", "flchain_survival_missingness_summary.csv")
+summary_path = os.path.join(project_path, "reports", "flchain_survival_missingness_summary.csv")
 missingness_df.to_csv(summary_path, index=False)
 
 print(f"Missingness summary saved to {summary_path}")
