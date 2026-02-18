@@ -5,7 +5,12 @@ import numpy as np
 from sksurv.datasets import load_breast_cancer
 
 # Read config.yml to get project path
-config_path = "config.yml"
+if '__file__' in globals():
+    config_path = os.path.join(os.path.dirname(__file__), '..', '..', 'config.yml')
+else:
+    # For interactive environments, use current working directory
+    config_path = os.path.join(os.getcwd(), '..', 'config.yml')
+
 with open(config_path, 'r') as config_file:
     config = yaml.safe_load(config_file)
 
