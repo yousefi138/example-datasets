@@ -44,7 +44,7 @@ python flchain.py
 
 ---
 
-## 📁 Directory Structure
+## Directory Structure
 
 ```
 example-datasets/
@@ -52,7 +52,6 @@ example-datasets/
 ├── scripts/
 │   ├── breast-cancer-survival.py
 │   ├── flchain.py
-│   ├── config.yml              ← Points to project data directory
 │   └── config-template.yml     ← Template (copy to config.yml)
 │
 ├── data/
@@ -65,86 +64,3 @@ example-datasets/
     ├── breast_cancer_survival_missingness_summary.csv
     └── flchain_survival_missingness_summary.csv
 ```
-
----
-
-## 🚀 Quick Start
-
-1. **Set up configuration** (if not already done):
-   ```bash
-   cd scripts
-   cp config-template.yml config.yml
-   # Edit config.yml to point to your project directory
-   ```
-
-2. **Download breast cancer dataset**:
-   ```bash
-   python breast-cancer-survival.py
-   ```
-
-3. **Download FLChain dataset**:
-   ```bash
-   python flchain.py
-   ```
-
-4. **Use data in ML pipeline**:
-   ```bash
-   cd ../../ml-pipeline
-   python ml_pipeline.py
-   ```
-
----
-
-## 📊 Dataset Details
-
-### Breast Cancer Survival
-- **Source**: scikit-survival German breast cancer dataset
-- **Samples**: 198
-- **Features**: 80 (4 clinical + 76 gene expression)
-- **Target**: Binary event (recurrence/death)
-- **Class balance**: Imbalanced (recommendation: use stratified CV)
-
-### FLChain
-- **Source**: scikit-survival FLChain dataset
-- **Samples**: 7,874
-- **Features**: 9
-- **Target**: Binary event (death)
-- **Class balance**: Imbalanced
-
----
-
-## 🔧 Configuration
-
-Edit `scripts/config.yml` to set the output directory:
-
-```yaml
-default:
-  project: /path/to/ml-pipeline  # Where datasets will be saved
-```
-
-Datasets are saved to: `{project}/data/`
-
----
-
-## 💾 Output Files
-
-After running the scripts, you'll get:
-
-**Data Files:**
-- `breast_cancer_survival.csv` - Original clean dataset
-- `breast_cancer_survival_with_missingness.csv` - Dataset with 15% missing age, 1% in 2 random features
-- `flchain_survival.csv` - Original clean dataset
-- `flchain_survival_with_missingness.csv` - Dataset with 15% missing age, 1% in 1 random feature
-
-**Report Files:**
-- `breast_cancer_survival_missingness_summary.csv` - Missingness statistics
-- `flchain_survival_missingness_summary.csv` - Missingness statistics
-
----
-
-## 📝 Notes
-
-- All scripts use `np.random.seed(42)` for reproducible missing data patterns
-- Missing data is generated using Bernoulli distributions (bernoulli missing completely at random)
-- Each time you run the script, missing values will be in the same locations (reproducible)
-- Config file uses YAML format and must be present in scripts/ directory
